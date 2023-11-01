@@ -1,11 +1,11 @@
 import Date from '../../components/date';
 import Head from 'next/head';
 import utilStyles from '../../styles/utils.module.css';
+import Layout from '../../components/layout'; // added this line
 
 import { getAllPostIds, getPostData } from '../../lib/posts';
 
 export async function getStaticProps({ params }) {
-    // Add the "await" keyword like this:
     const postData = await getPostData(params.id);
   
     return {
@@ -13,7 +13,8 @@ export async function getStaticProps({ params }) {
         postData,
       },
     };
-  }
+}
+
 export async function getStaticPaths() {
   const paths = getAllPostIds();
   return {
@@ -21,7 +22,6 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
 
 export default function Post({ postData }) {
     return (
@@ -38,5 +38,4 @@ export default function Post({ postData }) {
         </article>
       </Layout>
     );
-  }
-  
+}
